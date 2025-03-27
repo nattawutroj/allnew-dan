@@ -70,6 +70,14 @@ export interface Product2 {
   IsInDefaultList?: boolean | null;
   IsDeliveryOnly?: boolean | null;
   CrossSellDetails?: any | null;
+  Categories?: Category[] | null;
+}
+
+export interface Category {
+  Id?: number | null;
+  Level?: number | null;
+  Name?: string | null;
+  UrlFriendlyName?: string | null;
 }
 
 export interface Prices {
