@@ -1,227 +1,227 @@
 export interface ProductSearchConfigTypes {
-  Products: Product[] | null | undefined;
-  AvailableProductsCount: number | null | undefined;
-  DidYouMean: any | null | undefined;
-  SearchSource: string | null | undefined;
-  InspirationCards: InspirationCards | null | undefined;
-  Corrections: any | null | undefined;
-  SearchResultsCount: number | null | undefined;
-  Aggregations: Aggregation[] | null | undefined;
-  Banners: any[] | null | undefined;
-  SearchTerm: string | null | undefined;
+  Products?: Product[] | null;
+  AvailableProductsCount?: number | null;
+  DidYouMean?: any | null;
+  SearchSource?: string | null;
+  InspirationCards?: InspirationCards | null;
+  Corrections?: any | null;
+  SearchResultsCount?: number | null;
+  Aggregations?: Aggregation[] | null;
+  Banners?: any[] | null;
+  SearchTerm?: string | null;
 }
 
 export interface Product {
-  Name: string | null | undefined;
-  PackDefaultStockCode: string | null | undefined;
-  PackParentStockCode: string | null | undefined;
-  Products: Product2[] | null | undefined;
-  PackMessage: string | null | undefined;
-  IsInDefaultList: boolean | null | undefined;
-  IsPersonalised: boolean | null | undefined;
+  Name?: string | null;
+  PackDefaultStockCode?: string | null;
+  PackParentStockCode?: string | null;
+  Products?: Product2[] | null;
+  PackMessage?: string | null;
+  IsInDefaultList?: boolean | null;
+  IsPersonalised?: boolean | null;
 }
 
 export interface Product2 {
-  Stockcode: string | null | undefined;
-  Prices: Prices | null | undefined;
-  Inventory: Inventory | null | undefined;
-  Description: string | null | undefined;
-  SmallImageFile: string | null | undefined;
-  MediumImageFile: string | null | undefined;
-  LargeImageFile: string | null | undefined;
-  IsOnSpecial: boolean | null | undefined;
-  IsMemberSpecial: boolean | null | undefined;
-  IsEdrSpecial: boolean | null | undefined;
-  QuantityInTrolley: number | null | undefined;
-  Unit: string | null | undefined;
-  MinimumQuantity: number | null | undefined;
-  IsInTrolley: boolean | null | undefined;
-  Source: string | null | undefined;
-  SupplyLimit: number | null | undefined;
-  PackageSize: string | null | undefined;
-  IsForCollection: boolean | null | undefined;
-  IsForDelivery: boolean | null | undefined;
-  IsPurchasable: boolean | null | undefined;
-  IsFindMeAvailable: boolean | null | undefined;
-  ShouldShowFindMeCta: boolean | null | undefined;
-  ProductTags: ProductTag[] | null | undefined;
-  ProductSashes: ProductSash[] | null | undefined;
-  UniqueSellingProposition: UniqueSellingProposition[] | null | undefined;
-  InfoMessage?: InfoMessage | null | undefined;
-  AlcVolMessage: any | null | undefined;
-  AgeRestricted: boolean | null | undefined;
-  IsStickyPricingAvailabilityEnabled: boolean | null | undefined;
-  DisplayQuantity: number | null | undefined;
-  RichDescription: string | null | undefined;
-  IsFeaturedTag: boolean | null | undefined;
-  OverallRating: number | null | undefined;
-  NumberOfReviews: number | null | undefined;
-  IsNew: boolean | null | undefined;
-  ImageVariants: any[] | null | undefined;
-  AdditionalDetails: AdditionalDetail[] | null | undefined;
-  ParentStockCode: string | null | undefined;
-  StockOnHand: number | null | undefined;
-  BackorderStockOnHand: number | null | undefined;
-  IsPreSale: boolean | null | undefined;
-  IsComingSoon: boolean | null | undefined;
-  UrlFriendlyName: string | null | undefined;
-  AvailablePackTypes: AvailablePackType[] | null | undefined;
-  IsInWishList: boolean | null | undefined;
-  IsInDefaultList: boolean | null | undefined;
-  IsDeliveryOnly: boolean | null | undefined;
-  CrossSellDetails: any | null | undefined;
+  Stockcode?: string | null;
+  Prices?: Prices | null;
+  Inventory?: Inventory | null;
+  Description?: string | null;
+  SmallImageFile?: string | null;
+  MediumImageFile?: string | null;
+  LargeImageFile?: string | null;
+  IsOnSpecial?: boolean | null;
+  IsMemberSpecial?: boolean | null;
+  IsEdrSpecial?: boolean | null;
+  QuantityInTrolley?: number | null;
+  Unit?: string | null;
+  MinimumQuantity?: number | null;
+  IsInTrolley?: boolean | null;
+  Source?: string | null;
+  SupplyLimit?: number | null;
+  PackageSize?: string | null;
+  IsForCollection?: boolean | null;
+  IsForDelivery?: boolean | null;
+  IsPurchasable?: boolean | null;
+  IsFindMeAvailable?: boolean | null;
+  ShouldShowFindMeCta?: boolean | null;
+  ProductTags?: ProductTag[] | null;
+  ProductSashes?: ProductSash[] | null;
+  UniqueSellingProposition?: UniqueSellingProposition[] | null;
+  InfoMessage?: InfoMessage | null;
+  AlcVolMessage?: any | null;
+  AgeRestricted?: boolean | null;
+  IsStickyPricingAvailabilityEnabled?: boolean | null;
+  DisplayQuantity?: number | null;
+  RichDescription?: string | null;
+  IsFeaturedTag?: boolean | null;
+  OverallRating?: number | null;
+  NumberOfReviews?: number | null;
+  IsNew?: boolean | null;
+  ImageVariants?: any[] | null;
+  AdditionalDetails?: AdditionalDetail[] | null;
+  ParentStockCode?: string | null;
+  StockOnHand?: number | null;
+  BackorderStockOnHand?: number | null;
+  IsPreSale?: boolean | null;
+  IsComingSoon?: boolean | null;
+  UrlFriendlyName?: string | null;
+  AvailablePackTypes?: AvailablePackType[] | null;
+  IsInWishList?: boolean | null;
+  IsInDefaultList?: boolean | null;
+  IsDeliveryOnly?: boolean | null;
+  CrossSellDetails?: any | null;
 }
 
 export interface Prices {
-  inanysixprice?: Inanysixprice | null | undefined;
-  caseprice?: Caseprice | null | undefined;
-  singleprice?: Singleprice | null | undefined;
-  promoprice?: Promoprice | null | undefined;
+  inanysixprice?: Inanysixprice | null;
+  caseprice?: Caseprice | null;
+  singleprice?: Singleprice | null;
+  promoprice?: Promoprice | null;
 }
 
 export interface Inanysixprice {
-  Message?: string | null | undefined;
-  Value: number | null | undefined;
-  PreText: any | null | undefined;
-  BeforePromotion: any | null | undefined;
-  AfterPromotion: any | null | undefined;
-  IsMemberOffer: boolean | null | undefined;
-  MaxAward: number | null | undefined;
-  PackType?: string | null | undefined;
-  PromotionType: any | null | undefined;
+  Message?: string | null;
+  Value?: number | null;
+  PreText?: any | null;
+  BeforePromotion?: any | null;
+  AfterPromotion?: any | null;
+  IsMemberOffer?: boolean | null;
+  MaxAward?: number | null;
+  PackType?: string | null;
+  PromotionType?: any | null;
 }
 
 export interface Caseprice {
-  Message: string | null | undefined;
-  Value: number | null | undefined;
-  PreText: any | null | undefined;
-  BeforePromotion: any | null | undefined;
-  AfterPromotion: any | null | undefined;
-  IsMemberOffer: boolean | null | undefined;
-  MaxAward: number | null | undefined;
-  PackType: string | null | undefined;
-  PromotionType: any | null | undefined;
+  Message?: string | null;
+  Value?: number | null;
+  PreText?: any | null;
+  BeforePromotion?: any | null;
+  AfterPromotion?: any | null;
+  IsMemberOffer?: boolean | null;
+  MaxAward?: number | null;
+  PackType?: string | null;
+  PromotionType?: any | null;
 }
 
 export interface Singleprice {
-  Message: string | null | undefined;
-  Value: number | null | undefined;
-  PreText?: string | null | undefined;
-  BeforePromotion?: number | null | undefined;
-  AfterPromotion?: number | null | undefined;
-  IsMemberOffer: boolean | null | undefined;
-  MaxAward: number | null | undefined;
-  PackType: string | null | undefined;
-  PromotionType: any | null | undefined;
+  Message?: string | null;
+  Value?: number | null;
+  PreText?: string | null;
+  BeforePromotion?: number | null;
+  AfterPromotion?: number | null;
+  IsMemberOffer?: boolean | null;
+  MaxAward?: number | null;
+  PackType?: string | null;
+  PromotionType?: any | null;
 }
 
 export interface Promoprice {
-  Message: string | null | undefined;
-  Value: number | null | undefined;
-  PreText: string | null | undefined;
-  BeforePromotion: number | null | undefined;
-  AfterPromotion: number | null | undefined;
-  IsMemberOffer: boolean | null | undefined;
-  MaxAward: number | null | undefined;
-  PackType: string | null | undefined;
-  PromotionType: string | null | undefined;
+  Message?: string | null;
+  Value?: number | null;
+  PreText?: string | null;
+  BeforePromotion?: number | null;
+  AfterPromotion?: number | null;
+  IsMemberOffer?: boolean | null;
+  MaxAward?: number | null;
+  PackType?: string | null;
+  PromotionType?: string | null;
 }
 
 export interface Inventory {
-  availableinventoryqty?: number | null | undefined;
-  backorderavailableinventoryqty?: number | null | undefined;
-  backorderinventoryflag?: boolean | null | undefined;
-  samedaydeliveryinventoryqty?: number | null | undefined;
-  nextdaydeliveryinventoryqty?: number | null | undefined;
-  pickadaydeliveryinventoryqty?: number | null | undefined;
-  clickandcollect2hrsinventoryqty?: number | null | undefined;
-  clickandcollect7daysinventoryqty?: number | null | undefined;
-  findinstoreinventoryqty?: number | null | undefined;
-  samedaydeliveryinventoryqtymessage?: string | null | undefined;
-  nextdaydeliveryinventoryqtymessage?: string | null | undefined;
-  pickadaydeliveryinventoryqtymessage?: string | null | undefined;
-  clickandcollect2hrsinventoryqtymessage?: string | null | undefined;
-  clickandcollect7daysinventoryqtymessage?: string | null | undefined;
-  findinstoreinventoryqtymessage?: string | null | undefined;
-  isfindme2hrsinventoryavailable: boolean | null | undefined;
-  isfindme7daysinventoryavailable: boolean | null | undefined;
-  isfindmedeliveryinventoryavailable: boolean | null | undefined;
-  onlineinventoryqty?: number | null | undefined;
+  availableinventoryqty?: number | null;
+  backorderavailableinventoryqty?: number | null;
+  backorderinventoryflag?: boolean | null;
+  samedaydeliveryinventoryqty?: number | null;
+  nextdaydeliveryinventoryqty?: number | null;
+  pickadaydeliveryinventoryqty?: number | null;
+  clickandcollect2hrsinventoryqty?: number | null;
+  clickandcollect7daysinventoryqty?: number | null;
+  findinstoreinventoryqty?: number | null;
+  samedaydeliveryinventoryqtymessage?: string | null;
+  nextdaydeliveryinventoryqtymessage?: string | null;
+  pickadaydeliveryinventoryqtymessage?: string | null;
+  clickandcollect2hrsinventoryqtymessage?: string | null;
+  clickandcollect7daysinventoryqtymessage?: string | null;
+  findinstoreinventoryqtymessage?: string | null;
+  isfindme2hrsinventoryavailable?: boolean | null;
+  isfindme7daysinventoryavailable?: boolean | null;
+  isfindmedeliveryinventoryavailable?: boolean | null;
+  onlineinventoryqty?: number | null;
 }
 
 export interface ProductTag {
-  TagContent: string | null | undefined;
-  TagLink?: string | null | undefined;
-  FallbackText?: string | null | undefined;
-  TagType: string | null | undefined;
-  TagCriteria: string | null | undefined;
-  CriteriaValue: any | null | undefined;
+  TagContent?: string | null;
+  TagLink?: string | null;
+  FallbackText?: string | null;
+  TagType?: string | null;
+  TagCriteria?: string | null;
+  CriteriaValue?: any | null;
 }
 
 export interface ProductSash {
-  TagContent: string | null | undefined;
-  TagLink: any | null | undefined;
-  FallbackText: any | null | undefined;
-  TagType: string | null | undefined;
-  TagCriteria: string | null | undefined;
-  CriteriaValue: any | null | undefined;
+  TagContent?: string | null;
+  TagLink?: any | null;
+  FallbackText?: any | null;
+  TagType?: string | null;
+  TagCriteria?: string | null;
+  CriteriaValue?: any | null;
 }
 
 export interface UniqueSellingProposition {
-  Name: string | null | undefined;
-  Icon: string | null | undefined;
-  Url?: string | null | undefined;
-  Content: string | null | undefined;
-  Alt: string | null | undefined;
+  Name?: string | null;
+  Icon?: string | null;
+  Url?: string | null;
+  Content?: string | null;
+  Alt?: string | null;
 }
 
 export interface InfoMessage {
-  Name: string | null | undefined;
-  Icon: string | null | undefined;
-  Url: string | null | undefined;
-  Content: string | null | undefined;
-  Alt: string | null | undefined;
+  Name?: string | null;
+  Icon?: string | null;
+  Url?: string | null;
+  Content?: string | null;
+  Alt?: string | null;
 }
 
 export interface AdditionalDetail {
-  Name: string | null | undefined;
-  DisplayName: string | null | undefined;
-  Value: any | null | undefined;
+  Name?: string | null;
+  DisplayName?: string | null;
+  Value?: any | null;
 }
 
 export interface AvailablePackType {
-  Key: string | null | undefined;
-  DisplayName: string | null | undefined;
-  UnitQty: number | null | undefined;
+  Key?: string | null;
+  DisplayName?: string | null;
+  UnitQty?: number | null;
 }
 
 export interface InspirationCards {
-  Cards: Cards | null | undefined;
+  Cards?: Cards | null;
 }
 
 export interface Cards {}
 
 export interface Aggregation {
-  Name: string | null | undefined;
-  UrlFriendlyTerm: string | null | undefined;
-  DisplayName: string | null | undefined;
-  Type: string | null | undefined;
-  FilterType: string | null | undefined;
-  FilterDataType: string | null | undefined;
-  Results: AggregationResult[] | null | undefined;
-  State: string | null | undefined;
-  Rank: number | null | undefined;
-  AdditionalResults: boolean | null | undefined;
-  DesignType: string | null | undefined;
-  AggregationStats: any | null | undefined;
+  Name?: string | null;
+  UrlFriendlyTerm?: string | null;
+  DisplayName?: string | null;
+  Type?: string | null;
+  FilterType?: string | null;
+  FilterDataType?: string | null;
+  Results?: AggregationResult[] | null;
+  State?: string | null;
+  Rank?: number | null;
+  AdditionalResults?: boolean | null;
+  DesignType?: string | null;
+  AggregationStats?: any | null;
 }
 
 export interface AggregationResult {
-  Name: string | null | undefined;
-  Term?: string | null | undefined;
-  UrlFriendlyTerm?: string | null | undefined;
-  Min?: number | null | undefined;
-  Max?: number | null | undefined;
-  Applied: boolean | null | undefined;
-  Count: number | null | undefined;
+  Name?: string | null;
+  Term?: string | null;
+  UrlFriendlyTerm?: string | null;
+  Min?: number | null;
+  Max?: number | null;
+  Applied?: boolean | null;
+  Count?: number | null;
 }
