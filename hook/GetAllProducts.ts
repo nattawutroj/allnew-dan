@@ -7,10 +7,7 @@ import {
   getStockCodeList,
 } from "../api";
 import { DebugToFile } from "../utils/debug";
-import {
-  AggregationResult,
-  ProductSearchConfigTypes,
-} from "../types/productSearchConfig";
+import { ProductSearchConfigTypes } from "../types/productSearchConfig";
 import GetAggregations from "./GetAggregations";
 import { AGGREGATIONS_TARGET, MAX_RETRIES } from "../config";
 import GetProductsList from "./GetStockCodeList";
@@ -31,7 +28,7 @@ export async function GetAllProducts(
 
     let headersWritten = false;
 
-    const LoadAgg = async (agg: AggregationResult) => {
+    for (const agg of aggResultList) {
       const productsList = await GetProductsList(agg);
 
       for (const products of productsList) {
@@ -43,17 +40,7 @@ export async function GetAllProducts(
 
         if (!headersWritten) headersWritten = true;
       }
-      return "Agg Done";
-    };
-
-    const promises = aggResultList.map((agg) => {
-      return LoadAgg(agg);
-    });
-
-    do {
-      const x = await promises.pop();
-      console.log(x);
-    } while (promises.length <= 0);
+    }
   } catch (error) {
     console.error("Error in GetAllProducts:", error);
   }
