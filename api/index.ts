@@ -53,3 +53,11 @@ export function getStockCodeList(aggResult: AggregationResult, page?: any) {
     }),
   };
 }
+
+export function getOneProductConfig(stockCode: string) {
+  return {
+    url: `https://api.danmurphys.com.au/apis/ui/Product/${stockCode}`,
+    method: "GET",
+    headers: APIHeaders,
+  };
+}

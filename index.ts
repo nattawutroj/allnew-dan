@@ -8,7 +8,7 @@ export default function main() {
       InitialFiles(Store);
 
     ChangeStore(Store);
-    GetAllProducts();
+    GetAllProducts(Store, writeStreamCombine);
   }
 }
 

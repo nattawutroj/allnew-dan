@@ -6,6 +6,8 @@ export const APIHeaders = {
   "Content-Type": "application/json",
 };
 
-export const PAGE_SIZE = 1000;
+
+export const MAX_RETRIES = 500;
+export const PAGE_SIZE = 50;
 
 export const AGGREGATIONS_TARGET = AggregationsEnum.Brand;

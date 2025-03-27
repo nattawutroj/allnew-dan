@@ -81,49 +81,13 @@ export interface Category {
 }
 
 export interface Prices {
-  inanysixprice?: Inanysixprice | null;
-  caseprice?: Caseprice | null;
-  singleprice?: Singleprice | null;
-  promoprice?: Promoprice | null;
+  inanysixprice?: PricesType | null;
+  caseprice?: PricesType | null;
+  singleprice?: PricesType | null;
+  promoprice?: PricesType | null;
 }
 
-export interface Inanysixprice {
-  Message?: string | null;
-  Value?: number | null;
-  PreText?: any | null;
-  BeforePromotion?: any | null;
-  AfterPromotion?: any | null;
-  IsMemberOffer?: boolean | null;
-  MaxAward?: number | null;
-  PackType?: string | null;
-  PromotionType?: any | null;
-}
-
-export interface Caseprice {
-  Message?: string | null;
-  Value?: number | null;
-  PreText?: any | null;
-  BeforePromotion?: any | null;
-  AfterPromotion?: any | null;
-  IsMemberOffer?: boolean | null;
-  MaxAward?: number | null;
-  PackType?: string | null;
-  PromotionType?: any | null;
-}
-
-export interface Singleprice {
-  Message?: string | null;
-  Value?: number | null;
-  PreText?: string | null;
-  BeforePromotion?: number | null;
-  AfterPromotion?: number | null;
-  IsMemberOffer?: boolean | null;
-  MaxAward?: number | null;
-  PackType?: string | null;
-  PromotionType?: any | null;
-}
-
-export interface Promoprice {
+export interface PricesType {
   Message?: string | null;
   Value?: number | null;
   PreText?: string | null;
