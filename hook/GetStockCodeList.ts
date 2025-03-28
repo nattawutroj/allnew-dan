@@ -30,12 +30,14 @@ export default async function GetProductsList(
         try {
           res = await cloudscraper(getStockCodeList(aggResult, i, isTerm));
           const list = JSON.parse(res) as ProductSearchConfigTypes;
+          if (list?.Products.length > 0) {
+            list?.Products?.forEach((a) => {
+              ProductList?.push(a);
+            });
+          }
           if (list?.Products.length === 0) {
             break;
           }
-          list?.Products?.forEach((a) => {
-            ProductList?.push(a);
-          });
           console.log(
             isTerm ? "Term :" : "URL :",
             i,

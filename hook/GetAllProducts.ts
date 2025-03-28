@@ -27,7 +27,7 @@ export async function GetAllProducts(
       (agg) => agg.Name === AGGREGATIONS_TARGET
     ).Results;
 
-    // aggResultList.sort((a, b) => a.Count - b.Count);
+    aggResultList.sort((a, b) => a.Count - b.Count);
 
     let headersWritten = false;
 
