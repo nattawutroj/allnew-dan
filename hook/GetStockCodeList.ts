@@ -5,52 +5,116 @@ import {
   ProductSearchConfigTypes,
 } from "../types/productSearchConfig";
 import { getStockCodeList } from "../api";
-import { MAX_RETRIES, PAGE_SIZE } from "../config";
+import { MAX_RETRIES, PAGE_SIZE, CONCURRENCY_LIMIT } from "../config";
+import { DebugToFile } from "../utils/debug";
+import { after } from "node:test";
+import { WriteStream } from "node:fs";
+import { delay } from "../utils/general";
 
-export default async function GetProductsList(aggResult: AggregationResult) {
-  const ProductList: Product[] = [];
+export default async function GetProductsList(
+  aggResult: AggregationResult,
+  writeStreamInfo?: WriteStream
+) {
   const loop =
     aggResult.Count % PAGE_SIZE === 0
       ? Number((aggResult.Count / PAGE_SIZE).toFixed(0))
       : Number((aggResult.Count / PAGE_SIZE).toFixed(0)) + 1;
 
-  const fetchPageData = async (index: number) => {
-    let res;
-    let retries = 0;
+  const fetchPageData = async (isTerm: boolean = false) => {
+    const ProductList: Product[] = [];
+    for (let i = 1; i <= loop; i++) {
+      let res;
+      let retries = 0;
 
-    while (retries <= MAX_RETRIES) {
-      try {
-        res = await cloudscraper(getStockCodeList(aggResult, index));
-        const list = JSON.parse(res) as ProductSearchConfigTypes;
-        console.log(index, "Add");
-        list.Products.forEach((a) => {
-          ProductList.push(a);
-        });
-
-        return `Done ${aggResult.Term}`;
-      } catch (error) {
-        console.error(
-          `Error fetching data for page ${index} Brand : ${aggResult.Term}`
-        );
-        retries++;
-
-        if (retries > MAX_RETRIES) {
-          console.error(
-            `Max retries reached for page ${index} page ${index} Brand : ${aggResult.Term}. Skipping.`
+      while (retries <= MAX_RETRIES) {
+        try {
+          delay(150)
+          res = await cloudscraper(getStockCodeList(aggResult, i, isTerm));
+          const list = JSON.parse(res) as ProductSearchConfigTypes;
+          if (list?.Products.length === 0) {
+            break;
+          }
+          list?.Products?.forEach((a) => {
+            ProductList?.push(a);
+          });
+          console.log(
+            isTerm ? "Term :" : "URL :",
+            i,
+            "Add All this Brand Items form",
+            ProductList.length,
+            "/",
+            aggResult.Count,
+            " index : ",
+            i,
+            "/",
+            loop
           );
-          return "Failed";
-        }
+          break;
+        } catch (error) {
+          retries++;
 
-        console.log(`Retrying page ${index}... (${retries}/${MAX_RETRIES})`);
+          if (retries > MAX_RETRIES) {
+            console.error(
+              `Max retries reached for page ${i} Brand : ${aggResult.UrlFriendlyTerm}. Skipping.`
+            );
+            break;
+          }
+
+          // console.log(
+          //   `Retrying page ${i}... (${retries}/${MAX_RETRIES}) Brand :  ${aggResult.UrlFriendlyTerm}`
+          // );
+        }
       }
     }
+    return ProductList;
   };
+  const [ProductsWithUrl, ProductsWithTerm] = await Promise.all([
+    fetchPageData(false),
+    fetchPageData(true),
+  ]);
 
-  const promises = Array.from({ length: loop }, (_, index) =>
-    fetchPageData(index + 1)
+  //
+  const combinedProducts: Product[] = [...ProductsWithUrl, ...ProductsWithTerm];
+
+  const uniqueProducts = Array.from(
+    new Map(
+      combinedProducts.map((product) => [
+        product?.Products[0].Stockcode,
+        product,
+      ])
+    ).values()
   );
 
-  await Promise.all(promises);
+  console.log(
+    "Before Combine:",
+    ProductsWithUrl.length,
+    ":",
+    ProductsWithTerm.length
+  );
+  console.log("After Combine:", uniqueProducts.length);
 
-  return ProductList;
+  // คำนวณเปอร์เซ็นต์
+  const combinedPercentage = (
+    (uniqueProducts.length / aggResult.Count) *
+    100
+  ).toFixed(2);
+  const missingCount = aggResult.Count - uniqueProducts.length;
+  const missingPercentage = ((missingCount / aggResult.Count) * 100).toFixed(2);
+
+  // จัดรูปแบบแต่ละฟิลด์ให้มีความกว้างคงที่
+  const brand = aggResult.UrlFriendlyTerm.padEnd(20);
+  const urlCount = ProductsWithUrl.length.toString().padStart(5);
+  const termCount = ProductsWithTerm.length.toString().padStart(5);
+  const combinedCount = `${uniqueProducts.length}/${aggResult.Count}`.padStart(
+    12
+  );
+  const combinedPct = combinedPercentage.toString().padStart(6);
+  const missingCnt = missingCount.toString().padStart(5);
+  const missingPct = missingPercentage.toString().padStart(6);
+
+  // เขียน log ใน 1 แถว
+  writeStreamInfo.write(
+    `Brand: ${brand} | URL: ${urlCount} | Term: ${termCount} | Combined: ${combinedCount} (${combinedPct}%) | Missing: ${missingCnt} (${missingPct}%)\n`
+  );
+  return uniqueProducts;
 }

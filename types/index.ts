@@ -11,6 +11,7 @@ export enum PartEnum {
 
 export enum AggregationsEnum {
   Brand = "brand",
+  Variety = "Variety",
 }
 
 export enum AdditionalDetailsEnum {
@@ -44,3 +45,12 @@ export type ScrapDataTypes = {
   SCRAPE_DATE: string;
   FILENAME: string;
 };
+
+export type FiltersTypes = {
+  Key: AggregationsEnum;
+  Items: {
+    Term?: string;
+    UrlFriendlyTerm?: string;
+    Parent: AggregationsEnum;
+  }[];
+}[];

@@ -18,6 +18,7 @@ import Papa from "papaparse";
 export async function GetAllProducts(
   store?: StoreTypes,
   stream?: WriteStream,
+  writeStreamInfo?: WriteStream,
   part?: PartEnum
 ) {
   try {
@@ -26,10 +27,12 @@ export async function GetAllProducts(
       (agg) => agg.Name === AGGREGATIONS_TARGET
     ).Results;
 
+    // aggResultList.sort((a, b) => a.Count - b.Count);
+
     let headersWritten = false;
 
     for (const agg of aggResultList) {
-      const productsList = await GetProductsList(agg);
+      const productsList = await GetProductsList(agg, writeStreamInfo);
 
       for (const products of productsList) {
         const items = await Scrap(store, products);

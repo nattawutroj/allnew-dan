@@ -2,13 +2,17 @@ import { GetAllProducts } from "./hook/GetAllProducts";
 import { InitialFiles } from "./hook/InitialFiles";
 import { ChangeStore, Stores } from "./store";
 
-export default function main() {
+export default async function main() {
   for (const Store of Stores) {
-    const { writeStreamUrl, writeStreamTerm, writeStreamCombine } =
-      InitialFiles(Store);
+    const {
+      writeStreamUrl,
+      writeStreamTerm,
+      writeStreamCombine,
+      writeStreamInfo,
+    } = InitialFiles(Store);
 
-    ChangeStore(Store);
-    GetAllProducts(Store, writeStreamCombine);
+    await ChangeStore(Store);
+    await GetAllProducts(Store, writeStreamCombine, writeStreamInfo);
   }
 }
 

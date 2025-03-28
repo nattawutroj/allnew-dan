@@ -8,6 +8,7 @@ export function InitialFiles(store: StoreTypes) {
   const fileNameUrl = `danmurphys_${dateStr}_${store.postalCode}Url.csv`;
   const fileNameTerm = `danmurphys_${dateStr}_${store.postalCode}Term.csv`;
   const fileNameCombine = `danmurphys_${dateStr}_${store.postalCode}.csv`;
+  const fileNameInfo = `danmurphys_${dateStr}_${store.postalCode}Info.csv`;
 
   const writeStreamUrl = fs.createWriteStream(
     path.resolve(process.cwd(), fileNameUrl)
@@ -18,5 +19,8 @@ export function InitialFiles(store: StoreTypes) {
   const writeStreamCombine = fs.createWriteStream(
     path.resolve(process.cwd(), fileNameCombine)
   );
-  return { writeStreamUrl, writeStreamTerm, writeStreamCombine };
+  const writeStreamInfo = fs.createWriteStream(
+    path.resolve(process.cwd(), fileNameInfo)
+  );
+  return { writeStreamUrl, writeStreamTerm, writeStreamCombine, writeStreamInfo };
 }

@@ -1,6 +1,7 @@
 import cloudscraper from "cloudscraper";
 import { getChangeStoreConfig } from "../api";
 import { DataTypeStoreChanges } from "../types/storeChange";
+import { delay } from "../utils/general";
 
 export type StoreTypes = {
   name: string;
@@ -44,6 +45,7 @@ export async function ChangeStore(store: StoreTypes) {
   var res;
   while (true) {
     try {
+      await delay(200)
       res = await cloudscraper(getChangeStoreConfig(store.storeNo));
       break;
     } catch {

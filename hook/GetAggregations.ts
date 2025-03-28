@@ -2,6 +2,7 @@ import cloudscraper from "cloudscraper";
 import { getProductSearchConfig } from "../api";
 import { ProductSearchConfigTypes } from "../types/productSearchConfig";
 import { MAX_RETRIES } from "../config";
+import { delay } from "../utils/general";
 
 export default async function GetAggregations() {
   let res;
@@ -9,6 +10,7 @@ export default async function GetAggregations() {
 
   while (retries <= MAX_RETRIES) {
     try {
+      await delay(200);
       res = await cloudscraper(getProductSearchConfig());
       return JSON.parse(res) as ProductSearchConfigTypes;
     } catch (error) {
