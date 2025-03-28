@@ -28,7 +28,6 @@ export default async function GetProductsList(
 
       while (retries <= MAX_RETRIES) {
         try {
-          delay(150)
           res = await cloudscraper(getStockCodeList(aggResult, i, isTerm));
           const list = JSON.parse(res) as ProductSearchConfigTypes;
           if (list?.Products.length === 0) {
