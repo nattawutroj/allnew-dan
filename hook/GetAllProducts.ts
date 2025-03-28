@@ -31,7 +31,11 @@ export async function GetAllProducts(
 
     let headersWritten = false;
 
+    let debugRoundBand = 0;
     for (const agg of aggResultList) {
+      debugRoundBand++;
+      console.log(`${debugRoundBand}/${aggResultList.length}`);
+
       const productsList = await GetProductsList(agg, writeStreamInfo);
 
       for (const products of productsList) {
