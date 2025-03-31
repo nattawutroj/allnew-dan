@@ -1,25 +1,15 @@
 import { WriteStream } from "node:fs";
-import { AggregationsEnum, PartEnum, StoreTypes } from "../types";
-import cloudscraper from "cloudscraper";
-import {
-  getOneProductConfig,
-  getProductSearchConfig,
-  getStockCodeList,
-} from "../api";
-import { DebugToFile } from "../utils/debug";
-import { ProductSearchConfigTypes } from "../types/productSearchConfig";
+import { StoreTypes } from "../types";
 import GetAggregations from "./GetAggregations";
-import { AGGREGATIONS_TARGET, MAX_RETRIES } from "../config";
+import { AGGREGATIONS_TARGET, CONCURRENCY_LIMIT } from "../config";
 import GetProductsList from "./GetStockCodeList";
 import { Scrap } from "./Scrap";
-import { DataFinal } from "../storage";
 import Papa from "papaparse";
 
 export async function GetAllProducts(
   store?: StoreTypes,
   stream?: WriteStream,
-  writeStreamInfo?: WriteStream,
-  part?: PartEnum
+  writeStreamInfo?: WriteStream
 ) {
   try {
     const data = await GetAggregations();
@@ -27,27 +17,31 @@ export async function GetAllProducts(
       (agg) => agg.Name === AGGREGATIONS_TARGET
     ).Results;
 
-    aggResultList.sort((a, b) => a.Count - b.Count);
-
     let headersWritten = false;
+    const workers = Array.from({ length: CONCURRENCY_LIMIT }, async () => {
+      while (true) {
+        if (aggResultList.length > 0) {
+          const productsList = await GetProductsList(
+            aggResultList.pop(),
+            writeStreamInfo
+          );
 
-    let debugRoundBand = 0;
-    for (const agg of aggResultList) {
-      debugRoundBand++;
-      console.log(`${debugRoundBand}/${aggResultList.length}`);
+          for (const products of productsList) {
+            const items = await Scrap(store, products);
 
-      const productsList = await GetProductsList(agg, writeStreamInfo);
+            const csvOptions = { header: !headersWritten };
+            const csv = Papa.unparse(items, csvOptions);
+            stream.write(csv + "\n");
 
-      for (const products of productsList) {
-        const items = await Scrap(store, products);
-
-        const csvOptions = { header: !headersWritten };
-        const csv = Papa.unparse(items, csvOptions);
-        stream.write(csv + "\n");
-
-        if (!headersWritten) headersWritten = true;
+            if (!headersWritten) headersWritten = true;
+          }
+        } else {
+          break;
+        }
       }
-    }
+    });
+    await Promise.all(workers);
+    
   } catch (error) {
     console.error("Error in GetAllProducts:", error);
   }

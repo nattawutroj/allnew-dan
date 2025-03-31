@@ -11,7 +11,10 @@ function FindInAdditional(additionalDetails: AdditionalDetail[], name: string) {
   return detail ? detail.Value : null;
 }
 
-export async function Scrap(store: StoreTypes, product: Product) {
+export async function Scrap(
+  store: StoreTypes,
+  product: Product | null | undefined
+) {
   return Object?.entries(product?.Products?.[0]?.Prices)?.map(([_, value]) => {
     const data: ScrapDataTypes = {
       STOCKCODE: null,

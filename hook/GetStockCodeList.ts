@@ -5,17 +5,14 @@ import {
   ProductSearchConfigTypes,
 } from "../types/productSearchConfig";
 import { getStockCodeList } from "../api";
-import { MAX_RETRIES, PAGE_SIZE, CONCURRENCY_LIMIT } from "../config";
-import { DebugToFile } from "../utils/debug";
-import { after } from "node:test";
+import { MAX_RETRIES, PAGE_SIZE } from "../config";
 import { WriteStream } from "node:fs";
-import { delay } from "../utils/general";
 
 export default async function GetProductsList(
   aggResult: AggregationResult,
   writeStreamInfo?: WriteStream
 ) {
-  const loop =
+  var loop =
     aggResult.Count % PAGE_SIZE === 0
       ? Number((aggResult.Count / PAGE_SIZE).toFixed(0))
       : Number((aggResult.Count / PAGE_SIZE).toFixed(0)) + 1;
@@ -25,6 +22,7 @@ export default async function GetProductsList(
     for (let i = 1; i <= loop; i++) {
       let res;
       let retries = 0;
+      let ThisProductCount = 0;
 
       while (retries <= MAX_RETRIES) {
         try {
@@ -35,9 +33,11 @@ export default async function GetProductsList(
               ProductList?.push(a);
             });
           }
+          ThisProductCount = list?.Products.length;
           if (list?.Products.length === 0) {
             break;
           }
+
           console.log(
             isTerm ? "Term :" : "URL :",
             i,
@@ -60,11 +60,10 @@ export default async function GetProductsList(
             );
             break;
           }
-
-          // console.log(
-          //   `Retrying page ${i}... (${retries}/${MAX_RETRIES}) Brand :  ${aggResult.UrlFriendlyTerm}`
-          // );
         }
+      }
+      if (i + 1 <= loop === false && ThisProductCount === PAGE_SIZE) {
+        loop++;
       }
     }
     return ProductList;
@@ -74,7 +73,6 @@ export default async function GetProductsList(
     fetchPageData(true),
   ]);
 
-  //
   const combinedProducts: Product[] = [...ProductsWithUrl, ...ProductsWithTerm];
 
   const uniqueProducts = Array.from(

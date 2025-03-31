@@ -1,5 +1,5 @@
 import { AGGREGATIONS_TARGET, APIHeaders, PAGE_SIZE } from "../config";
-import { AggregationsEnum, FiltersTypes } from "../types";
+import { FiltersTypes } from "../types";
 import { AggregationResult } from "../types/productSearchConfig";
 
 export function getChangeStoreConfig(storeNo: number) {
@@ -70,13 +70,5 @@ export function getStockCodeList(
       SortType: "Name",
       Location: "ListerFacet",
     }),
-  };
-}
-
-export function getOneProductConfig(stockCode: string) {
-  return {
-    url: `https://api.danmurphys.com.au/apis/ui/Product/${stockCode}`,
-    method: "GET",
-    headers: APIHeaders,
   };
 }

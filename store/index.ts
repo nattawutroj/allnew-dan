@@ -9,36 +9,36 @@ export type StoreTypes = {
   storeNo: number;
 };
 export const Stores = [
-  // {
-  //   name: "Thornleigh",
-  //   postalCode: 2120,
-  //   storeNo: 1546,
-  // },
+  {
+    name: "Thornleigh",
+    postalCode: 2120,
+    storeNo: 1546,
+  },
   {
     name: "West End",
     postalCode: 4101,
     storeNo: 6979,
   },
-  // {
-  //   name: "Oaklands Park (Marion)",
-  //   postalCode: 5046,
-  //   storeNo: 5656,
-  // },
-  // {
-  //   name: "Launceston",
-  //   postalCode: 7250,
-  //   storeNo: 7230,
-  // },
-  // {
-  //   name: "Brighton (East)",
-  //   postalCode: 3187,
-  //   storeNo: 3440,
-  // },
-  // {
-  //   name: "Balga",
-  //   postalCode: 6061,
-  //   storeNo: 4413,
-  // },
+  {
+    name: "Oaklands Park (Marion)",
+    postalCode: 5046,
+    storeNo: 5656,
+  },
+  {
+    name: "Launceston",
+    postalCode: 7250,
+    storeNo: 7230,
+  },
+  {
+    name: "Brighton (East)",
+    postalCode: 3187,
+    storeNo: 3440,
+  },
+  {
+    name: "Balga",
+    postalCode: 6061,
+    storeNo: 4413,
+  },
 ];
 
 export async function ChangeStore(store: StoreTypes) {

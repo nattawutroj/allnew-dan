@@ -4,12 +4,7 @@ import { ChangeStore, Stores } from "./store";
 
 export default async function main() {
   for (const Store of Stores) {
-    const {
-      writeStreamUrl,
-      writeStreamTerm,
-      writeStreamCombine,
-      writeStreamInfo,
-    } = InitialFiles(Store);
+    const { writeStreamCombine, writeStreamInfo } = InitialFiles(Store);
 
     await ChangeStore(Store);
     await GetAllProducts(Store, writeStreamCombine, writeStreamInfo);
