@@ -38,20 +38,24 @@ export default async function GetProductsList(
             break;
           }
 
-          workers_monitor[Worker_Index] = `${
-            isTerm ? "Term :" : "URL  :"
-          }${i}${" Add All this Brand Items form "}${
-            ProductList.length
-          }${" / "}${aggResult.Count}${" index : "}${i}${" / "}${loop}`;
+          workers_monitor[Worker_Index] =
+            `${isTerm ? "Term:" : "URL:"} Page ${i} - ` +
+            `Added ${ProductList.length} / ${aggResult.Count} items for brand '${aggResult.UrlFriendlyTerm}' ` +
+            `(Index: ${i}/${loop})`;
 
           break;
         } catch (error) {
           retries++;
 
+          workers_monitor[Worker_Index] =
+            `${isTerm ? "Term:" : "URL:"} Page ${i} - ` +
+            `Retries reached for brand '${aggResult.UrlFriendlyTerm}' ` +
+            `(attempt ${retries}/${MAX_RETRIES}), Index: ${i}/${loop}`;
+
           if (retries > MAX_RETRIES) {
             workers_monitor[
               Worker_Index
-            ] = `Max retries reached for page ${i} Brand : ${aggResult.UrlFriendlyTerm}. Skipping.`;
+            ] = `Max retries reached for page ${i} Brand: ${aggResult.UrlFriendlyTerm}. Skipping.`;
             break;
           }
         }
