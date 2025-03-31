@@ -77,5 +77,5 @@ export function startStatusLogger() {
     }
 
     Display.yellow(`====================================`);
-  }, 1000);
+  }, 100);
 }
