@@ -20,11 +20,11 @@ export const Stores = [
   //   postalCode: 4101,
   //   storeNo: 6979,
   // },
-  {
-    name: "Oaklands Park (Marion)",
-    postalCode: 5046,
-    storeNo: 5656,
-  },
+  // {
+  //   name: "Oaklands Park (Marion)",
+  //   postalCode: 5046,
+  //   storeNo: 5656,
+  // },
   {
     name: "Launceston",
     postalCode: 7250,
