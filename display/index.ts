@@ -59,7 +59,7 @@ export function startStatusLogger() {
     
     Display.magenta(`Request Per Second: ${requestPerSec.toFixed(2)} req/s`);
     Display.cyan(`Progress         : ${percentProgress.toFixed(2)} %`);
-    
+
     if (remainingTimeSec > 0) {
       Display.magenta(
         `Estimated Finish : ~${remainingTimeSec.toFixed(2)} Minute from now`
@@ -67,9 +67,6 @@ export function startStatusLogger() {
     } else {
       Display.magenta(`Estimated Finish : Calculating...`);
     }
-
-    Display.normal(`Prevent Store Use: ${""} Store ${""}`);
-    Display.normal(`Store Run Time   : ${""}`);
     Display.normal(`Request Count    : ${BLUE}${display[2]}`);
     Display.green(`Processing Now   : ${RESET}${display[3]}`);
     Display.green(`Brands           : ${display[4]}/${display[5]}`);
