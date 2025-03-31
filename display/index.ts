@@ -53,8 +53,13 @@ export function startStatusLogger() {
     Display.yellow(`Current Time     : ${currentTime.toLocaleTimeString()}`);
     Display.cyan(`Start Time       : ${startTime.toLocaleTimeString()}`);
     Display.magenta(`Elapsed Time     : ${elapsedSec.toFixed(2)} seconds`);
-
-    // แสดงเวลาประเมินเสร็จสิ้น
+    
+    const requestPerSec = display[2] / elapsedSec;
+    const percentProgress = display[5] > 0 ? (display[4] / display[5]) * 100 : 0;
+    
+    Display.magenta(`Request Per Second: ${requestPerSec.toFixed(2)} req/s`);
+    Display.cyan(`Progress         : ${percentProgress.toFixed(2)} %`);
+    
     if (remainingTimeSec > 0) {
       Display.magenta(
         `Estimated Finish : ~${remainingTimeSec.toFixed(2)} Minute from now`

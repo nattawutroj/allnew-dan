@@ -10,7 +10,6 @@ import { display, workers_monitor } from "../display";
 export async function GetAllProducts(
   store?: StoreTypes,
   stream?: WriteStream,
-  writeStreamInfo?: WriteStream
 ) {
   try {
     const data = await GetAggregations();

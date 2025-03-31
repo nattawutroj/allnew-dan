@@ -7,10 +7,10 @@ export default async function main() {
   const statusLogger = startStatusLogger();
   for (const Store of Stores) {
     InitialDisplay();
-    const { writeStreamCombine, writeStreamInfo } = InitialFiles(Store);
+    const { writeStreamCombine } = InitialFiles(Store);
     display[0] = Store.name;
     await ChangeStore(Store);
-    await GetAllProducts(Store, writeStreamCombine, writeStreamInfo);
+    await GetAllProducts(Store, writeStreamCombine);
   }
   clearInterval(statusLogger);
 }
