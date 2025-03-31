@@ -3,10 +3,13 @@ import { getProductSearchConfig } from "../api";
 import { ProductSearchConfigTypes } from "../types/productSearchConfig";
 import { MAX_RETRIES } from "../config";
 import { delay } from "../utils/general";
+import { display } from "../display";
 
 export default async function GetAggregations() {
   let res;
   let retries = 0;
+
+  display[3] = "Get Aggregations";
 
   while (retries <= MAX_RETRIES) {
     try {
@@ -14,17 +17,18 @@ export default async function GetAggregations() {
       res = await cloudscraper(getProductSearchConfig());
       return JSON.parse(res) as ProductSearchConfigTypes;
     } catch (error) {
-      console.error(`Error fetching aggregation`);
+      display[3] = `Error fetching aggregation`;
       retries++;
 
       if (retries > MAX_RETRIES) {
-        console.error(`Max retries reached. Failing.`);
+        display[3] = `Max retries reached. Failing.`;
         break;
       }
 
-      console.log(`Retrying GetAggregations... (${retries}/${MAX_RETRIES})`);
+      display[3] = `Retrying GetAggregations... (${retries}/${MAX_RETRIES})`;
     }
   }
 
-  throw new Error("Failed to retrieve aggregations after multiple attempts.");
+  if (retries > MAX_RETRIES)
+    display[3] = "Failed to retrieve aggregations after multiple attempts.";
 }

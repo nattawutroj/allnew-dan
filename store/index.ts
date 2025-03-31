@@ -2,6 +2,7 @@ import cloudscraper from "cloudscraper";
 import { getChangeStoreConfig } from "../api";
 import { DataTypeStoreChanges } from "../types/storeChange";
 import { delay } from "../utils/general";
+import { display } from "../display";
 
 export type StoreTypes = {
   name: string;
@@ -9,16 +10,16 @@ export type StoreTypes = {
   storeNo: number;
 };
 export const Stores = [
-  {
-    name: "Thornleigh",
-    postalCode: 2120,
-    storeNo: 1546,
-  },
-  {
-    name: "West End",
-    postalCode: 4101,
-    storeNo: 6979,
-  },
+  // {
+  //   name: "Thornleigh",
+  //   postalCode: 2120,
+  //   storeNo: 1546,
+  // },
+  // {
+  //   name: "West End",
+  //   postalCode: 4101,
+  //   storeNo: 6979,
+  // },
   {
     name: "Oaklands Park (Marion)",
     postalCode: 5046,
@@ -42,20 +43,19 @@ export const Stores = [
 ];
 
 export async function ChangeStore(store: StoreTypes) {
+  display[3] = `ChangeStore`;
   var res;
   while (true) {
     try {
-      await delay(200)
+      await delay(200);
       res = await cloudscraper(getChangeStoreConfig(store.storeNo));
       break;
     } catch {
-      console.log(`Retry >>>>  Get Store Config Store ${store.storeNo}`);
+      display[3] = `Retry >> Get Store Config Store ${store.storeNo}`;
     }
   }
   const data = JSON.parse(res);
   const { Success, ClickAndCollectDetails } = data as DataTypeStoreChanges;
   if (Success)
-    console.log(
-      `Changed store to: ${ClickAndCollectDetails.AddressSuburb} (${ClickAndCollectDetails.AddressPostalCode})`
-    );
+    display[3] = `Changed store to: ${ClickAndCollectDetails.AddressSuburb} (${ClickAndCollectDetails.AddressPostalCode})`;
 }

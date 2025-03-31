@@ -1,8 +1,10 @@
 import { AGGREGATIONS_TARGET, APIHeaders, PAGE_SIZE } from "../config";
+import { display } from "../display";
 import { FiltersTypes } from "../types";
 import { AggregationResult } from "../types/productSearchConfig";
 
 export function getChangeStoreConfig(storeNo: number) {
+  display[2] = display[2] + 1;
   return {
     url: "https://api.danmurphys.com.au/apis/ui/Fulfilment/Pickup",
     method: "POST",
@@ -15,6 +17,7 @@ export function getChangeStoreConfig(storeNo: number) {
 }
 
 export function getProductSearchConfig(page?: number) {
+  display[2] = display[2] + 1;
   return {
     url: "https://api.danmurphys.com.au/apis/ui/Search/products",
     method: "POST",
@@ -35,6 +38,7 @@ export function getStockCodeList(
   page?: number,
   isTerm?: boolean
 ) {
+  display[2] = display[2] + 1;
   const Filters: FiltersTypes = [];
 
   if (isTerm) {
