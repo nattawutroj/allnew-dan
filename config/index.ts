@@ -7,7 +7,7 @@ export const APIHeaders = {
 };
 
 
-export const MAX_RETRIES = 500;
+export const MAX_RETRIES = 10;
 export const PAGE_SIZE = 50;
 
 export const CONCURRENCY_LIMIT = 4
