@@ -10,21 +10,21 @@ export type StoreTypes = {
   storeNo: number;
 };
 export const Stores = [
-  // {
-  //   name: "Thornleigh",
-  //   postalCode: 2120,
-  //   storeNo: 1546,
-  // },
-  // {
-  //   name: "West End",
-  //   postalCode: 4101,
-  //   storeNo: 6979,
-  // },
-  // {
-  //   name: "Oaklands Park (Marion)",
-  //   postalCode: 5046,
-  //   storeNo: 5656,
-  // },
+  {
+    name: "Thornleigh",
+    postalCode: 2120,
+    storeNo: 1546,
+  },
+  {
+    name: "West End",
+    postalCode: 4101,
+    storeNo: 6979,
+  },
+  {
+    name: "Oaklands Park (Marion)",
+    postalCode: 5046,
+    storeNo: 5656,
+  },
   {
     name: "Launceston",
     postalCode: 7250,
