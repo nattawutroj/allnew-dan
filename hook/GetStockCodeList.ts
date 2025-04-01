@@ -5,8 +5,9 @@ import {
   ProductSearchConfigTypes,
 } from "../types/productSearchConfig";
 import { getStockCodeList } from "../api";
-import { MAX_RETRIES, PAGE_SIZE } from "../config";
+import { DELAY, MAX_RETRIES, PAGE_SIZE } from "../config";
 import { display, workers_monitor } from "../display";
+import { delay } from "../utils/general";
 
 export default async function GetProductsList(
   aggResult: AggregationResult,
@@ -58,6 +59,7 @@ export default async function GetProductsList(
             ] = `Max retries reached for page ${i} Brand: ${aggResult.UrlFriendlyTerm}. Skipping.`;
             break;
           }
+          await delay(DELAY);
         }
       }
       if (i + 1 <= loop === false && ThisProductCount === PAGE_SIZE) {

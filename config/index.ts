@@ -1,4 +1,5 @@
 import { AggregationsEnum } from "../types";
+import { getRandomInt } from "../utils/general";
 
 export const APIHeaders = {
   "User-Agent":
@@ -6,10 +7,11 @@ export const APIHeaders = {
   "Content-Type": "application/json",
 };
 
-
 export const MAX_RETRIES = 100;
 export const PAGE_SIZE = 50;
 
-export const CONCURRENCY_LIMIT = 5
+export const CONCURRENCY_LIMIT = 5;
+
+export const DELAY = getRandomInt(150, 300);
 
 export const AGGREGATIONS_TARGET = AggregationsEnum.Brand;

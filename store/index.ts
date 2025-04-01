@@ -3,6 +3,7 @@ import { getChangeStoreConfig } from "../api";
 import { DataTypeStoreChanges } from "../types/storeChange";
 import { delay } from "../utils/general";
 import { display } from "../display";
+import { DELAY } from "../config";
 
 export type StoreTypes = {
   name: string;
@@ -47,11 +48,11 @@ export async function ChangeStore(store: StoreTypes) {
   var res;
   while (true) {
     try {
-      await delay(200);
       res = await cloudscraper(getChangeStoreConfig(store.storeNo));
       break;
     } catch {
       display[3] = `Retry >> Get Store Config Store ${store.storeNo}`;
+      await delay(DELAY);
     }
   }
   const data = JSON.parse(res);
