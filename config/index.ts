@@ -7,7 +7,7 @@ export const APIHeaders = {
   "Content-Type": "application/json",
 };
 
-export const MAX_RETRIES = 100;
+export const MAX_RETRIES = 20;
 export const PAGE_SIZE = 50;
 
 export const CONCURRENCY_LIMIT = 5;
